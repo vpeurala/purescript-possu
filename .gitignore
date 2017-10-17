@@ -1,3 +1,4 @@
+
 *.log
 *.pid
 *.pid.lock
@@ -14,6 +15,15 @@
 .psci
 .psci_modules
 .yarn-integrity
+/.psa*
+/.psc*
+/.psc-package/
+/.pulp-cache/
+/.purs*
+/bower_components/
+/generated-docs/
+/node_modules/
+/output/
 bower_components
 build/Release
 coverage
@@ -27,4 +37,3 @@ pids
 typings
 yarn-debug.log*
 yarn-error.log*
-
