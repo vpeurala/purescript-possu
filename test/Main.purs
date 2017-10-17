@@ -1,9 +1,14 @@
 module Test.Main where
 
-import Prelude
+import Node.ChildProcess (ChildProcess, CHILD_PROCESS)
+import Node.ChildProcess as ChildProcess
+
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 
-main :: forall e. Eff (console :: CONSOLE | e) Unit
+import Prelude
+
+main :: forall e. Eff (child_process :: CHILD_PROCESS, console :: CONSOLE | e) Unit
 main = do
-  log "You should add some tests."
+  dockerDbProcess <- ChildProcess.spawn "db/docker-build.sh" [] ChildProcess.defaultSpawnOptions
+  log "Spawned"
