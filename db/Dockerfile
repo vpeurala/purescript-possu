@@ -1,2 +1,2 @@
-FROM amd64/postgres:10
+FROM postgres:10
 
