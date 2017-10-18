@@ -21,7 +21,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src test"
+    "lint": "eslint src/**/*.js test/**/*.js"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
