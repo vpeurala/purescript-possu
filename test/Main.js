@@ -1,6 +1,7 @@
 'use strict';
 
 const pg = require('pg');
+const Promise = require('bluebird');
 
 function doTestStuff() {
     console.log('Doing test stuff.');
