@@ -1,0 +1,13 @@
+{
+  "name": "purescript-possu",
+  "version": "0.0.1",
+  "description": "An alternative PureScript binding library to npm library node-postgres.",
+  "main": "index.js",
+  "repository": "git@github.com:vpeurala/purescript-possu.git",
+  "author": "Ville Peurala <ville.peurala@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "pg": "^7.3.0"
+  }
+}
