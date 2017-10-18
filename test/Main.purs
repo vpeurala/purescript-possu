@@ -1,6 +1,6 @@
 module Test.Main where
 
-import Node.ChildProcess (ChildProcess, CHILD_PROCESS)
+import Node.ChildProcess (ChildProcess, CHILD_PROCESS, pid)
 import Node.ChildProcess as ChildProcess
 
 import Data.Posix.Signal (Signal(..))
@@ -13,6 +13,6 @@ import Prelude
 main :: forall e. Eff (cp :: CHILD_PROCESS, console :: CONSOLE | e) Unit
 main = do
   dockerDbProcess <- ChildProcess.spawn "db/docker-build.sh" [] ChildProcess.defaultSpawnOptions
-  log "Spawned"
+  log $ "Spawned: " <> (show $ pid dockerDbProcess)
   killResult <- ChildProcess.kill SIGTERM dockerDbProcess
   log $ "Killed: " <> (show killResult)
