@@ -1,11 +1,37 @@
 'use strict';
 
-var pg = require('pg');
 var Promise = require('bluebird');
+var pg_pool = require('pg-pool');
+var Pool = Promise.promisifyAll(pg_pool.Pool);
+
+process.on('unhandledRejection', function (reason, promise) {
+    console.error(reason, promise);
+});
+process.on('rejectionHandled', function (promise) {
+    console.error(promise);
+});
+process.on('promiseCreated', function (promise, child) {
+    console.error(promise, child);
+});
+process.on('promiseChained', function (promise, child) {
+    console.error(promise, child);
+});
+process.on('promiseFulfilled', function (promise, child) {
+    console.error(promise, child);
+});
+process.on('promiseRejected', function (promise, child) {
+    console.error(promise, child);
+});
+process.on('promiseResolved', function (promise, child) {
+    console.error(promise, child);
+});
+process.on('promiseCancelled', function (promise, child) {
+    console.error(promise, child);
+});
 
 function doTestStuff() {
     console.log('Doing test stuff.');
-    var pool = new pg.Pool({
+    var pool = new Pool({
         user: 'postgres',
         host: 'localhost',
         database: 'postgres',
@@ -14,24 +40,24 @@ function doTestStuff() {
         Promise: Promise
     });
     pool.on('connect', function (client) {
-        console.log("pool.on('connect')", client);
+        console.log('pool.on(\'connect\')', client);
     });
     pool.on('acquire', function (client) {
-        console.log("pool.on('acquire')", client);
+        console.log('pool.on(\'acquire\')', client);
     });
     pool.on('error', function (err, client) {
-        console.log("pool.on('error')", err, client);
+        console.log('pool.on(\'error\')', err, client);
     });
-    console.log("Before query");
-    pool.query('SELECT name FROM viha')
+    console.log('Before query');
+    pool.queryAsync('SELECT name FROM viha')
         .then(function (res) {
-            console.error(res);
+            console.log('Response: ', res);
         })
         .catch(function (err) {
-            console.error("Error executing query", err.stack);
+            console.error('Error executing query', err.stack);
         });
     pool.end();
-    console.log("After query");
+    console.log('After query');
 }
 
 exports.doTestStuff = doTestStuff;

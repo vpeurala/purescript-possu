@@ -21,7 +21,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src/**/*.js test/**/*.js"
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "refresh": "rm -rf yarn.lock bower_components node_modules output .purs-repl .pulp-cache .psci_modules && yarn install --flat --force --non-interactive && bower install --force",
+    "test": "BLUEBIRD_DEBUG=1 pulp test"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -31,5 +33,14 @@
     "eslint": "^4.9.0"
   },
   "flat": true,
-  "private": false
+  "private": false,
+  "resolutions": {
+    "semver": "5.4.1",
+    "chalk": "2.2.0",
+    "strip-ansi": "4.0.0",
+    "ansi-styles": "3.2.0",
+    "supports-color": "4.5.0",
+    "ansi-regex": "3.0.0",
+    "acorn": "5.1.2"
+  }
 }
