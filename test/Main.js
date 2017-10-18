@@ -17,6 +17,4 @@ function doTestStuff() {
     });
 }
 
-module.exports = {
-    doTestStuff: doTestStuff
-};
+exports.doTestStuff = doTestStuff;
