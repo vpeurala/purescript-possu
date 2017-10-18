@@ -1,14 +1,35 @@
 {
   "name": "purescript-possu",
   "version": "0.0.1",
-  "description": "An alternative PureScript binding library to npm library node-postgres.",
-  "main": "index.js",
-  "repository": "git@github.com:vpeurala/purescript-possu.git",
-  "author": "Ville Peurala <ville.peurala@gmail.com>",
+  "description": "An alternative PureScript binding library to npm library node-postgres (also known as pg).",
+  "keywords": [
+    "purescript",
+    "postgres",
+    "postgresql",
+    "node",
+    "node-postgres",
+    "pg",
+    "possu"
+  ],
   "license": "MIT",
-  "private": false,
+  "homepage": "https://github.com/vpeurala/purescript-possu",
+  "bugs": "https://github.com/vpeurala/purescript-possu/issues",
+  "repository": "git@github.com:vpeurala/purescript-possu.git",
+  "author": "Ville Peurala <ville.peurala@gmail.com> (https://villepeurala.fi)",
+  "files": [
+    "src"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src test"
+  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "pg": "^7.3.0"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0"
+  },
+  "flat": true,
+  "private": false
 }
