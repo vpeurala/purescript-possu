@@ -23,7 +23,7 @@
   "scripts": {
     "lint": "eslint src/**/*.js test/**/*.js",
     "refresh": "rm -rf yarn.lock bower_components node_modules output .purs-repl .pulp-cache .psci_modules && yarn install --flat --force --non-interactive && bower install --force",
-    "test": "BLUEBIRD_DEBUG=1 pulp test"
+    "test": "NODE_ENV=development pulp test"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
