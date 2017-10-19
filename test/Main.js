@@ -14,11 +14,9 @@ var doTestPromise = function () {
     });
     return pool.query('SELECT name FROM viha')
         .then(function (res) {
-            pool.end();
             return res;
         })
         .catch(function (err) {
-            pool.end();
             throw err;
         });
 };
