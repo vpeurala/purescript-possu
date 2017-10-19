@@ -12,7 +12,7 @@ var doTestPromise = function () {
         password: 'leipuri',
         port: 5432
     });
-    pool.query('SELECT name FROM viha')
+    return pool.query('SELECT name FROM viha')
         .then(function (res) {
             pool.end();
             return res;
