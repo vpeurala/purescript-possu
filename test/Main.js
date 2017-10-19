@@ -1,9 +1,10 @@
 'use strict';
 
+var async = require('asyncawait/async');
+var await = require('asyncawait/await');
 var pg = require('pg');
 
-function doTestStuff() {
-    console.log('Doing test stuff.');
+var doTestPromise = function () {
     var pool = new pg.Pool({
         user: 'postgres',
         host: 'localhost',
@@ -11,30 +12,21 @@ function doTestStuff() {
         password: 'leipuri',
         port: 5432
     });
-    pool.on('connect', function (client) {
-        console.log('pool.on(\'connect\')', client);
-    });
-    pool.on('acquire', function (client) {
-        console.log('pool.on(\'acquire\')', client);
-    });
-    pool.on('error', function (err, client) {
-        console.log('pool.on(\'error\')', err, client);
-    });
-    console.log('Before query');
-    var result = pool.query('SELECT name FROM viha', [], function(err, res) {
-        console.log('In pool.query callback');
-        if (err) {
-            pool.release(err);
-        }
-        if (res) {
-            pool.release();
-        }
-        console.log('err: ', err);
-        console.log('res: ', res);
-    });
-    console.log('After query, result: ', result);
-    pool.end();
-    return result;
-}
+    pool.query('SELECT name FROM viha')
+        .then(function (res) {
+            pool.end();
+            return res;
+        })
+        .catch(function (err) {
+            pool.end();
+            throw err;
+        });
+};
+
+var doTestStuff = async(function () {
+    var res = await(doTestPromise);
+    console.log('res: ', res);
+    return res;
+});
 
 exports.doTestStuff = doTestStuff;
