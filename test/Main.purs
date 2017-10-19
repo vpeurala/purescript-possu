@@ -5,10 +5,10 @@ import Node.ChildProcess (CHILD_PROCESS, defaultSpawnOptions, kill, pid, spawn)
 import Data.Posix.Signal (Signal(SIGTERM))
 
 import Control.Monad.Aff (Aff)
+import Control.Monad.Aff.Console (CONSOLE, log)
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.AVar (AVAR)
 import Control.Monad.Eff.Class (liftEff)
-import Control.Monad.Eff.Console (CONSOLE, log)
 
 import Test.Spec (describe, it)
 import Test.Spec.Reporter.Console (consoleReporter)
@@ -21,12 +21,9 @@ main = run [consoleReporter] do
   describe "FFI spike" do
     it "does not crash" do
       dockerDbProcess <- liftEff $ spawn "db/docker-build.sh" [] defaultSpawnOptions
-      logA $ "Spawned: " <> (show $ pid dockerDbProcess)
+      log $ "Spawned: " <> (show $ pid dockerDbProcess)
       liftEff doTestStuff
       killResult <- liftEff $ kill SIGTERM dockerDbProcess
-      logA $ "Killed: " <> (show killResult)
-
-logA :: forall eff. String -> Aff (console :: CONSOLE | eff) Unit
-logA str = liftEff $ log str
+      log $ "Killed: " <> (show killResult)
 
 foreign import doTestStuff :: forall e. Eff (e) Unit
