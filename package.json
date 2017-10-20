@@ -26,8 +26,8 @@
     "test": "NODE_ENV=development pulp test"
   },
   "dependencies": {
-    "asyncawait": "^1.0.6",
     "bluebird": "^3.5.1",
+    "fibers": "^2.0.0",
     "pg": "^7.3.0"
   },
   "devDependencies": {
@@ -42,7 +42,6 @@
     "ansi-styles": "3.2.0",
     "supports-color": "4.5.0",
     "ansi-regex": "3.0.0",
-    "acorn": "5.1.2",
-    "lodash": "4.17.4"
+    "acorn": "5.1.2"
   }
 }
