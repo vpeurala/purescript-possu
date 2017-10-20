@@ -2,7 +2,7 @@ module Test.Main where
 
 import Node.ChildProcess (CHILD_PROCESS, ChildProcess, defaultSpawnOptions, kill, pid, spawn)
 
---import Data.Foreign (Foreign)
+import Data.Foreign (Foreign)
 import Data.Posix.Signal (Signal(SIGTERM))
 
 import Control.Monad.Aff.Compat (EffFnAff, fromEffFnAff)
@@ -26,7 +26,7 @@ main = run [consoleReporter] do
     it "does not crash" do
       dockerDbProcess <- setUpDb
       log $ "Spawned: " <> (show $ pid dockerDbProcess)
-      doTestStuffResult <- fromEffFnAff doTestStuff
+      doTestStuffResult <- liftEff $ try doTestStuff
       log $ "doTestStuffResult: " <> (show doTestStuffResult)
       killResult <- liftEff $ tearDownDb dockerDbProcess
       log $ "Killed: " <> (show killResult)
@@ -37,7 +37,7 @@ setUpDb = liftEff $ spawn "db/docker-build.sh" [] defaultSpawnOptions
 tearDownDb :: forall eff ret. MonadEff (cp :: CHILD_PROCESS | eff) ret => ChildProcess -> ret Boolean
 tearDownDb dbProcess = liftEff $ kill SIGTERM dbProcess
 
-foreign import doTestStuff :: forall eff. EffFnAff (eff) String
+foreign import doTestStuff :: forall eff. Eff (eff) Unit
 
 {--
 derive instance genericForeign :: Generic Foreign
